@@ -1,0 +1,40 @@
+//to install ml-agents and or activate env
+
+conda create -n ml-agents python=3.7
+
+conda activate ml-agents
+
+python -m pip install -e ./ 
+
+D:
+
+MUST RUN THESE INSTALLATIONS IN ORDER TO USE THE TRAINING COMMAND mlagents-learn
+IF INSTALLATION FAILS CLONE AN EARLIER REPO OF MLAGENTS (ON A DIFFERENT BRANCH)
+#ANY TIME YOU UPDATE MLAGENTS TO A NEW VERSION YOU MUST CREATE A NEW CONDA ENVIRONMENT AND INSTALL MLAGENTS FOLDER INTO IT. OTHERWISE YOUD BE USING THE OLD TRAIN COMMAND AND ETC
+cd ../ml-agents #That would be the /ml-agents folder at the same level as ml-agents-envs
+python -m pip install -e ./
+
+cd ../ml-agents-envs #That would be the /ml-agents folder at the same level as ml-agents
+python -m pip install -e ./
+
+
+
+cd .. 
+
+//if needed :
+conda install -c anaconda pyzmq
+
+
+//train: https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Training-ML-Agents.md
+//first activate environment or put --env<env_name> in the train command
+//<env_name>(Optional) is the name (including path) of your Unity executable containing the agents to be trained. If <env_name> is not passed, the training will happen in the Editor (press play)
+
+cd D:\ml-agents-master\ml-agents-master\
+
+mlagents-learn config/trainer_config.yaml --curriculum config/curricula/penguin.yaml --run-id name --train
+//for hallway
+mlagents-learn config/trainer_config.yaml --run-id name --train
+
+// tensorboard. while training run:
+tensorboard --logdir=D:\ml-agents-master\ml-agents-master\summaries --port 6006
+
